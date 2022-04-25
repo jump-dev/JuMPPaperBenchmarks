@@ -5,7 +5,11 @@
 
 using PackageCompiler, Libdl
 PackageCompiler.create_sysimage(
-    ["JuMP", "Gurobi"],
-    sysimage_path = "latency." * Libdl.dlext,
-    precompile_execution_file = "precompile.jl",
+    ["JuMP", "Gurobi", "Ipopt"],
+    sysimage_path = joinpath(@__DIR__, "sysimage." * Libdl.dlext),
+    precompile_execution_file = [
+        joinpath(@__DIR__, "clnlbeam.jl"),
+        joinpath(@__DIR__, "facility.jl"),
+        joinpath(@__DIR__, "lqcp.jl"),
+    ],
 )

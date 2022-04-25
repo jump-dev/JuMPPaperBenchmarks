@@ -67,9 +67,9 @@ function main(io::IO, Ns = [500, 1000, 1500, 2000])
 end
 
 if isempty(ARGS)
-    open("benchmarks.csv", "a") do io
+    main(stdout, [5])
+else
+    open(joinpath(@__DIR__, "benchmarks.csv"), "a") do io
         main(io)
     end
-else
-    main(stdout, [5])
 end

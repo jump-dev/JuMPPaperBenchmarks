@@ -6,6 +6,6 @@
 using PackageCompiler, Libdl
 PackageCompiler.create_sysimage(
     ["JuMP", "HiGHS"],
-    sysimage_path = "latency." * Libdl.dlext,
-    precompile_execution_file = "model.jl",
+    sysimage_path = joinpath(@__DIR__, "sysimage." * Libdl.dlext),
+    precompile_execution_file = joinpath(@__DIR__, "model.jl"),
 )
