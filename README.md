@@ -1,2 +1,3 @@
 # JuMPPaperBenchmarks
-Benchmarks for a paper on JuMP 1.0
+
+This repository contains code snippents and benchmarks for a paper on JuMP 1.0.
