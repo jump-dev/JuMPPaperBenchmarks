@@ -6,5 +6,9 @@
 using JuMP, HiGHS
 model = direct_model(HiGHS.Optimizer())
 @variable(model, x)
-highs = backend(model) # A pointer to the highs problem
-Highs_scaleCol(highs, HiGHS.column(model, x), 0.1)
+#  A pointer to the highs problem
+highs = backend(model)
+#  0-indexed column of x in highs
+col = HiGHS.column(highs, optimizer_index(x))
+#  Call the C API
+Highs_scaleCol(highs, col, 0.1)
