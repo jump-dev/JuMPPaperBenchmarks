@@ -4,7 +4,7 @@
 # in the LICENSE.md file or at https://opensource.org/licenses/MIT.
 
 using JuMP, GLPK
-model = direct_model(GLPK.Optimizer())
+model = Model(GLPK.Optimizer)
 @variable(model, 0 <= x[1:2] <= 2.5, Int)
 @objective(model, Max, 1.0 * x[2])
 function my_callback_function(cb_data)

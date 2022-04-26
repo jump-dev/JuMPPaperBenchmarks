@@ -46,7 +46,7 @@ function get_model(arg)
     end
 end
 
-function main(io::IO, Ns = [100, 1_000, 10_000, 100_000])
+function main(io::IO, Ns = [5_000, 50_000, 500_000])
     for type in ["direct", "no-bridges", "bridges"]
         for n in Ns
             start = time()
