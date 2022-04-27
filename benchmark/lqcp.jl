@@ -48,20 +48,19 @@ end
 function get_model(arg)
     if arg == "direct"
         return direct_model(Gurobi.Optimizer())
-    elseif arg == "no-bridges"
-        return Model(Gurobi.Optimizer; add_bridges = false)
     else
         return Model(Gurobi.Optimizer)
     end
 end
 
 function main(io::IO, Ns = [500, 1000, 1500, 2000])
-    for type in ["direct", "no-bridges", "bridges"]
+    for type in ["direct", "default"]
         for n in Ns
             start = time()
-            solve_lqcp(get_model(type), n)
+            model = solve_lqcp(get_model(type), n)
             run_time = round(Int, time() - start)
-            println(io, "$type lqcp-$n $run_time")
+            num_var = num_variables(model)
+            println(io, "$type lqcp-$n $num_var $run_time")
         end
     end
 end

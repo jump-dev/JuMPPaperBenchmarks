@@ -10,11 +10,11 @@ function solve_facility(model, G, F)
     set_time_limit_sec(model, 0.0)
     set_optimizer_attribute(model, "Presolve", 0)
     @variables(model, begin
-        d
         0 <= y[1:F, 1:2] <= 1
-        z[0:G, 0:G, 1:F], Bin
         s[0:G, 0:G, 1:F] >= 0
+        z[0:G, 0:G, 1:F], Bin
         r[0:G, 0:G, 1:F, 1:2]
+        d
     end)
     @objective(model, Min, d)
     @constraint(model, [i in 0:G, j in 0:G], sum(z[i,j,f] for f in 1:F) == 1)
@@ -41,20 +41,19 @@ end
 function get_model(arg)
     if arg == "direct"
         return direct_model(Gurobi.Optimizer())
-    elseif arg == "no-bridges"
-        return Model(Gurobi.Optimizer; add_bridges = false)
     else
         return Model(Gurobi.Optimizer)
     end
 end
 
 function main(io::IO, Ns = [25, 50, 75, 100])
-    for type in ["direct", "no-bridges", "bridges"]
+    for type in ["direct", "default"]
         for n in Ns
             start = time()
-            solve_facility(get_model(type), n, n)
+            model = solve_facility(get_model(type), n, n)
             run_time = round(Int, time() - start)
-            println(io, "$type fac-$n $run_time")
+            num_var = num_variables(model)
+            println(io, "$type fac-$n $num_var $run_time")
         end
     end
 end

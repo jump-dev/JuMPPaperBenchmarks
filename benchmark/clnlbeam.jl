@@ -34,25 +34,25 @@ function solve_clnlbeam(model, N)
         t[i+1] - t[i] - 0.5 * h * u[i+1] - 0.5 * h * u[i] == 0,
     )
     optimize!(model)
+    return model
 end
 
 function get_model(arg)
     if arg == "direct"
         return direct_model(Ipopt.Optimizer())
-    elseif arg == "no-bridges"
-        return Model(Ipopt.Optimizer; add_bridges = false)
     else
         return Model(Ipopt.Optimizer)
     end
 end
 
 function main(io::IO, Ns = [5_000, 50_000, 500_000])
-    for type in ["direct", "no-bridges", "bridges"]
+    for type in ["direct", "default"]
         for n in Ns
             start = time()
-            solve_clnlbeam(get_model(type), n)
+            model = solve_clnlbeam(get_model(type), n)
             run_time = round(Int, time() - start)
-            println(io, "$type clnlbeam-$n $run_time")
+            num_var = num_variables(model)
+            println(io, "$type clnlbeam-$n $num_var $run_time")
         end
     end
 end

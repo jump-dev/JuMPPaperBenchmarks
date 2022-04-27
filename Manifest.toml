@@ -137,9 +137,11 @@ uuid = "781609d7-10c4-51f6-84f2-b8444358ff6d"
 
 [[Gurobi]]
 deps = ["Libdl", "MathOptInterface", "Pkg"]
-git-tree-sha1 = "67d273949798c82781756b54af20d73b4dbe9e3f"
+git-tree-sha1 = "6a626e9618c15005ae7a0c729fb6fd80dc201718"
+repo-rev = "master"
+repo-url = "https://github.com/jump-dev/Gurobi.jl.git"
 uuid = "2e9cd046-0924-5485-92f1-d5272153d98b"
-version = "0.11.1"
+version = "0.11.2"
 
 [[HiGHS]]
 deps = ["HiGHS_jll", "MathOptInterface", "SparseArrays"]
@@ -257,8 +259,10 @@ deps = ["Base64"]
 uuid = "d6f4376e-aef5-505a-96c1-9c027394607a"
 
 [[MathOptInterface]]
-deps = ["BenchmarkTools", "CodecBzip2", "CodecZlib", "JSON", "LinearAlgebra", "MutableArithmetics", "OrderedCollections", "Printf", "SparseArrays", "Test", "Unicode"]
-git-tree-sha1 = "23c99cadd752cc0b70d4c74c969a679948b1bb6a"
+deps = ["BenchmarkTools", "CodecBzip2", "CodecZlib", "ForwardDiff", "JSON", "LinearAlgebra", "MutableArithmetics", "NaNMath", "OrderedCollections", "Printf", "SparseArrays", "SpecialFunctions", "Test", "Unicode"]
+git-tree-sha1 = "afd1f076d7e353cdee920e396f515ac9ddbbd4e3"
+repo-rev = "master"
+repo-url = "https://github.com/jump-dev/MathOptInterface.jl.git"
 uuid = "b8f27783-ece8-5eb3-8dc8-9495eed66fee"
 version = "1.2.0"
 
