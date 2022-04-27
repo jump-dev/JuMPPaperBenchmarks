@@ -1,3 +1,5 @@
 sysimage.*
 *.log
 *.csv
+*/__pycache__
+*/results.yml

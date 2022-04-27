@@ -4,13 +4,25 @@ This repository contains code snippents and benchmarks for a paper on JuMP 1.0.
 
 ## One-time setup
 
-First install Julia 1.6.
+First, install Gurobi and obtain a license.
 
-Once installed, initialize the environments as follows:
+Then, install Julia 1.6.
+
+Once installed, initialize the Julia environments as follows:
 ```
 $ julia --project=. -e "import Pkg; Pkg.instantiate"
 $ julia --project=. benchmark/create_sysimage.jl
 $ julia --project=. latency/create_sysimage.jl
+```
+
+To run the Pyomo experiments, install Pyomo and solvers as follows:
+```
+$ conda create --name pyomo --python=3.8 -y
+$ conda activate pyomo
+$ conda install -c conda-forge pyomo
+$ conda install -c conda-forge ipopt
+$ conda config --add channels https://conda.anaconda.org/gurobi
+$ conda install gurobi
 ```
 
 ## Run experiments
