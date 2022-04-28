@@ -25,18 +25,21 @@ $ conda config --add channels https://conda.anaconda.org/gurobi
 $ conda install gurobi
 ```
 
-## Run experiments
+## Run latency experiments
 
 ```
 $ time julia --project=. latency/model.jl
 $ time julia --project=. --sysimage latency/sysimage latency/model.jl
 ```
 
-## Run experiments
+## Run benchmark experiments
 
 ```
 $ julia --project=. --sysimage benchmark/sysimage benchmark/clnlbeam.jl --run
 $ julia --project=. --sysimage benchmark/sysimage benchmark/facility.jl --run
 $ julia --project=. --sysimage benchmark/sysimage benchmark/lqcp.jl --run
+$ python benchmark/clnlbeam.py
+$ python benchmark/facility.py
+$ python benchmark/lqcp.py
 ```
 

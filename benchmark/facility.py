@@ -5,6 +5,8 @@
 
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
+import os
+import time
 
 def solve_facility(solver, G, F):
     model = pyo.ConcreteModel()
@@ -45,5 +47,17 @@ def solve_facility(solver, G, F):
         opt.solve(model, tee=True)
     return model
 
-# model = solve_facility('gurobi_persistent', 50, 50)
-model = solve_facility('gurobi', 50, 50)
+def main(Ns = [25, 50, 75, 100]):
+    dir = os.path.realpath(os.path.dirname(__file__))
+    for n in Ns:
+        start = time.time()
+        try:
+            model = solve_facility('gurobi', n, n)
+        except:
+            pass
+        run_time = round(time.time() - start)
+        with open(dir + "/benchmarks.csv", "a") as io:
+            io.write("pyomo fac-%i -1 %i\n" % (n, run_time))
+    return
+
+main()

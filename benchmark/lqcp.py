@@ -5,6 +5,8 @@
 
 import pyomo.environ as pyo
 from pyomo.opt import SolverFactory
+import os
+import time
 
 def solve_lqcp(solver, N):
     model = pyo.ConcreteModel()
@@ -49,5 +51,17 @@ def solve_lqcp(solver, N):
         opt.solve(model, tee=True)
     return model
 
-# model = solve_lqcp('gurobi_persistent', 10)
-model = solve_lqcp('gurobi', 500)
+def main(Ns = [500, 1000, 1500, 2000]):
+    dir = os.path.realpath(os.path.dirname(__file__))
+    for n in Ns:
+        start = time.time()
+        try:
+            model = solve_lqcp('gurobi', n)
+        except:
+            pass
+        run_time = round(time.time() - start)
+        with open(dir + "/benchmarks.csv", "a") as io:
+            io.write("pyomo lqcp-%i -1 %i\n" % (n, run_time))
+    return
+
+main()        

@@ -10,12 +10,14 @@ for i in 1:size(df, 1)
     type, model, variables, time = df[i, :]
     inner = get!(models, model, Dict{String,Int}())
     inner[type] = time
-    inner["variables"] = variables
+    if type != "pyomo"
+        inner["variables"] = variables
+    end
 end
 for key in sort(collect(keys(models)))
     inner = models[key]
     print(rpad(key, 15))
-    for type in ["variables", "direct", "default"]
+    for type in ["variables", "direct", "default", "pyomo"]
         print(" & ", lpad(inner[type], 2))
     end
     println(" \\\\")
