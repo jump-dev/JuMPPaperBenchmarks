@@ -3,3 +3,5 @@ sysimage.*
 *.csv
 */__pycache__
 */results.yml
+benchmark/cpp_facility
+benchmark/cpp_lqcp
