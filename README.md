@@ -10,7 +10,7 @@ Then, install Julia 1.6.
 
 Once installed, initialize the Julia environments as follows:
 ```
-$ julia --project=. -e "import Pkg; Pkg.instantiate"
+$ julia --project=. -e "import Pkg; Pkg.instantiate()"
 $ julia --project=. benchmark/create_sysimage.jl
 $ julia --project=. latency/create_sysimage.jl
 ```
