@@ -20,7 +20,6 @@ To run the Pyomo experiments, install Pyomo and solvers as follows:
 $ conda create --name pyomo --python=3.8 -y
 $ conda activate pyomo
 $ conda install -c conda-forge pyomo
-$ conda install -c conda-forge ipopt
 $ conda config --add channels https://conda.anaconda.org/gurobi
 $ conda install gurobi
 ```
@@ -35,10 +34,8 @@ $ time julia --project=. --sysimage latency/sysimage latency/model.jl
 ## Run benchmark experiments
 
 ```
-$ julia --project=. --sysimage benchmark/sysimage benchmark/clnlbeam.jl --run
 $ julia --project=. --sysimage benchmark/sysimage benchmark/facility.jl --run
 $ julia --project=. --sysimage benchmark/sysimage benchmark/lqcp.jl --run
-$ python benchmark/clnlbeam.py
 $ python benchmark/facility.py
 $ python benchmark/lqcp.py
 ```
