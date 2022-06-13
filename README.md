@@ -24,6 +24,13 @@ $ conda config --add channels https://conda.anaconda.org/gurobi
 $ conda install gurobi
 ```
 
+To run the Gurobi experiments, compile the Gurobi executables. You must pass the
+version of Gurobi you are compiling for, e.g., `gurobi91` or `gurobi95` as a
+command line argument:
+```
+$ ./benchmark/gurobi_cpp_build.sh gurobi91
+```
+
 ## Run latency experiments
 
 ```
@@ -36,7 +43,11 @@ $ time julia --project=. --sysimage latency/sysimage latency/model.jl
 ```
 $ julia --project=. --sysimage benchmark/sysimage benchmark/facility.jl --run
 $ julia --project=. --sysimage benchmark/sysimage benchmark/lqcp.jl --run
+
 $ python benchmark/facility.py
 $ python benchmark/lqcp.py
-```
 
+$ julia benchmark/gurobi_cpp_run.jl
+
+$ julia benchmark/produce_table.jl
+```

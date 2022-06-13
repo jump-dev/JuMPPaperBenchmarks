@@ -19,6 +19,7 @@ function my_callback_function(cb_data)
         con = @build_constraint(x[2] + x[1] <= 3)
         MOI.submit(model, MOI.LazyConstraint(cb_data), con)
     end
+    return
 end
 MOI.set(model, MOI.LazyConstraintCallback(), my_callback_function)
 # Would also work with CPLEX.Optimizer, Gurobi.Optimizer, etc.

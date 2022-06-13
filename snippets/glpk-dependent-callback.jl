@@ -11,6 +11,7 @@ function my_callback_function(cb_data)
     if glp_ios_reason(cb_data.tree) == GLP_IBINGO
         glp_ios_terminate(cb_data.tree)
     end
+    return
 end
 MOI.set(model, GLPK.CallbackFunction(), my_callback_function)
 optimize!(model)
