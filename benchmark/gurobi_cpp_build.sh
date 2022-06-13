@@ -13,7 +13,14 @@
 # export GUROBI_HOME="/Library/gurobi951/macos_universal2/"
 
 cd benchmark
-export LD_LIBRARY_PATH=$GUROBI_HOME/lib/
-clang++ -O2 facility.cpp -o cpp_facility -I$GUROBI_HOME/include/ -L$GUROBI_HOME/lib -stdlib=libc++ -std=c++11 -lgurobi_c++ -l${1}
-clang++ -O2 lqcp.cpp -o cpp_lqcp -I$GUROBI_HOME/include/ -L$GUROBI_HOME/lib -stdlib=libc++ -std=c++11 -lgurobi_c++ -l${1}
+
+if [ "$(uname)" == "Linux" ]; then
+    g++ -O2 facility.cpp -o cpp_facility -I$GUROBI_HOME/include/ -L$GUROBI_HOME/lib -std=c++11 -lgurobi_c++ -l${1}
+    g++ -O2 lqcp.cpp -o cpp_lqcp -I$GUROBI_HOME/include/ -L$GUROBI_HOME/lib -std=c++11 -lgurobi_c++ -l${1}
+else
+    export LD_LIBRARY_PATH=$GUROBI_HOME/lib/
+    clang++ -O2 facility.cpp -o cpp_facility -I$GUROBI_HOME/include/ -L$GUROBI_HOME/lib -stdlib=libc++ -std=c++11 -lgurobi_c++ -l${1}
+    clang++ -O2 lqcp.cpp -o cpp_lqcp -I$GUROBI_HOME/include/ -L$GUROBI_HOME/lib -stdlib=libc++ -std=c++11 -lgurobi_c++ -l${1}
+fi
+
 cd ..
