@@ -6,13 +6,15 @@
 function main(io::IO)
     for n in [25, 50, 75, 100]
         start = time()
-        run(`./cpp_facility $n $n`)
+        file = joinpath(@__DIR__, "cpp_facility")
+        run(`$file $n $n`)
         run_time = round(Int, time() - start)
         println(io, "gurobi fac-$n 0 $run_time")
     end
     for n in [500, 1000, 1500, 2000]
         start = time()
-        run(`./cpp_lqcp $n $n`)
+        file = joinpath(@__DIR__, "cpp_lqcp")
+        run(`$file $n $n`)
         run_time = round(Int, time() - start)
         println(io, "gurobi lqcp-$n 0 $run_time")
     end

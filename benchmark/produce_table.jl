@@ -14,7 +14,7 @@ for i in 1:size(df, 1)
         inner["variables"] = variables
     end
 end
-@show models
+
 for key in [
     "fac-25",
     "fac-50",
